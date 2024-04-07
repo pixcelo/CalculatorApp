@@ -33,7 +33,8 @@ namespace CalculatorApp.Calculator.Command
 
             var expression = ConvertExpression(currentValue);
 
-            if (!char.IsDigit(expression.First()) || !char.IsDigit(expression.Last()))
+            if ((expression.First() != '-' && !char.IsDigit(expression.First())) ||
+                !char.IsDigit(expression.Last()))
             {
                 return;
             }
