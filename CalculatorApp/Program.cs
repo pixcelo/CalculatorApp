@@ -1,4 +1,5 @@
 using CalculatorApp.Calculator.Command;
+using CalculatorApp.Repositories;
 using log4net;
 using log4net.Config;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,7 @@ namespace CalculatorApp
         {
             services.AddSingleton<CalculatorForm>();
             services.AddTransient<CommandManager>();
+            services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
         }
     }
 }

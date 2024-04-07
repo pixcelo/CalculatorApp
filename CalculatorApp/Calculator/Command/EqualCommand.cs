@@ -1,24 +1,27 @@
 ﻿using CalculatorApp.Models;
+using CalculatorApp.Repositories;
 using System.Data;
 
 namespace CalculatorApp.Calculator.Command
 {
     public class EqualCommand : ICommand
     {
-        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);        
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private IHistoryRepository _historyRepository;
         private CalculatorViewModel _viewModel;
         private readonly DataTable _dataTable;
         private string _previousValue;
         private string _previousExpression;
 
-        public EqualCommand(CalculatorViewModel viewModel)
-        {            
+        public EqualCommand(IHistoryRepository historyRepository, CalculatorViewModel viewModel)
+        {
+            _historyRepository = historyRepository;
             _viewModel = viewModel;
             _dataTable = new DataTable();
         }
 
         public void Invoke()
-        {            
+        {
             var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
             _previousExpression = _viewModel.ExpressionText;
@@ -30,7 +33,7 @@ namespace CalculatorApp.Calculator.Command
 
             var expression = ConvertExpression(currentValue);
 
-            if (!char.IsDigit(expression.Last()))
+            if (!char.IsDigit(expression.First()) || !char.IsDigit(expression.Last()))
             {
                 return;
             }
@@ -44,7 +47,15 @@ namespace CalculatorApp.Calculator.Command
             }
             
             _viewModel.DisplayText = Convert.ToDouble(newValue).ToString("#,##0.#####");
-            _viewModel.ExpressionText = _previousValue + "=";            
+            _viewModel.ExpressionText = _previousValue + "=";
+
+            var history = new History
+            {
+                Operation = _viewModel.ExpressionText,
+                Result = _viewModel.DisplayText
+            };
+
+            _historyRepository.Save(history);
 
             logger.Info($"Result: {_viewModel.DisplayText}");
         }
