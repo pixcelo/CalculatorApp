@@ -336,9 +336,9 @@
             BtnDivision.Name = "BtnDivision";
             BtnDivision.Size = new Size(123, 95);
             BtnDivision.TabIndex = 18;
-            BtnDivision.Text = "=";
+            BtnDivision.Text = "÷";
             BtnDivision.UseVisualStyleBackColor = false;
-            BtnDivision.Click += EqualButton_Click;
+            BtnDivision.Click += OperationButton_Click;
             // 
             // PanelHeader
             // 
