@@ -384,17 +384,20 @@
             TextBoxExpression.Name = "TextBoxExpression";
             TextBoxExpression.Size = new Size(503, 55);
             TextBoxExpression.TabIndex = 21;
+            TextBoxExpression.TextAlign = HorizontalAlignment.Right;
             // 
             // TextBoxDisplay
             // 
             TextBoxDisplay.BackColor = Color.FromArgb(32, 32, 32);
             TextBoxDisplay.BorderStyle = BorderStyle.None;
+            TextBoxDisplay.Font = new Font("Yu Gothic UI", 14F);
             TextBoxDisplay.ForeColor = Color.DarkGray;
             TextBoxDisplay.Location = new Point(12, 126);
             TextBoxDisplay.Multiline = true;
             TextBoxDisplay.Name = "TextBoxDisplay";
             TextBoxDisplay.Size = new Size(510, 69);
             TextBoxDisplay.TabIndex = 22;
+            TextBoxDisplay.TextAlign = HorizontalAlignment.Right;
             // 
             // CalculatorForm
             // 

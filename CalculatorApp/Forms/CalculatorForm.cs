@@ -1,15 +1,20 @@
+using CalculatorApp.Calculator.Command;
+using CalculatorApp.Models;
 using System.Runtime.InteropServices;
 
 namespace CalculatorApp
 {
     public partial class CalculatorForm : Form
     {
+        private CommandManager _commandManager;
         private CalculatorViewModel _viewModel;
 
-        public CalculatorForm()
+        public CalculatorForm(CommandManager commandManager)
         {
             InitializeComponent();
             Setup();
+
+            _commandManager = commandManager;
         }
 
         private void Setup()
@@ -23,12 +28,16 @@ namespace CalculatorApp
 
         private void NumberButton_Click(object sender, EventArgs e)
         {
-
+            Button button = (Button)sender;
+            ICommand command = new NumberCommand(_viewModel, button.Text);
+            _commandManager.Invoke(command);
         }
 
         private void DotButton_Click(object sender, EventArgs e)
         {
-
+            Button button = (Button)sender;
+            ICommand command = new DotCommand(_viewModel, button.Text);
+            _commandManager.Invoke(command);
         }
 
         private void EqualButton_Click(object sender, EventArgs e)
@@ -43,12 +52,12 @@ namespace CalculatorApp
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-
+            _commandManager.Undo();
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
-
+            _commandManager.Redo();
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
