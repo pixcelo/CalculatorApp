@@ -62,7 +62,8 @@ namespace CalculatorApp
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-
+            ICommand command = new ClearCommand(_viewModel);
+            _commandManager.Invoke(command);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
