@@ -4,9 +4,21 @@ namespace CalculatorApp
 {
     public partial class CalculatorForm : Form
     {
+        private CalculatorViewModel _viewModel;
+
         public CalculatorForm()
         {
             InitializeComponent();
+            Setup();
+        }
+
+        private void Setup()
+        {
+            _viewModel = new CalculatorViewModel();
+            TextBoxDisplay.DataBindings.Add(nameof(TextBoxDisplay.Text), _viewModel, nameof(_viewModel.DisplayText));
+            TextBoxExpression.DataBindings.Add(nameof(TextBoxExpression.Text), _viewModel, nameof(_viewModel.ExpressionText));
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
         }
 
         private void NumberButton_Click(object sender, EventArgs e)
