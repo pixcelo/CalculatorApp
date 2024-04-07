@@ -1,4 +1,4 @@
-﻿namespace CalculatorApp
+﻿namespace CalculatorApp.Models
 {
     public class CalculatorModel
     {
