@@ -41,8 +41,8 @@ namespace CalculatorApp
         {
             services.AddSingleton<CalculatorForm>();
             services.AddTransient<CommandManager>();
-            services.AddTransient<IHistoryRepository, HistoryRepository>();
-            //services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
+            //services.AddTransient<IHistoryRepository, HistoryRepository>();
+            services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
         }
     }
 }
