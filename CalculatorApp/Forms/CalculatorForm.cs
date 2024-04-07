@@ -42,12 +42,15 @@ namespace CalculatorApp
 
         private void EqualButton_Click(object sender, EventArgs e)
         {
-
+            ICommand command = new EqualCommand(_viewModel);
+            _commandManager.Invoke(command);
         }
 
         private void OperationButton_Click(object sender, EventArgs e)
         {
-
+            Button button = (Button)sender;
+            ICommand command = new OperationCommand(_viewModel, button.Text);
+            _commandManager.Invoke(command);
         }
 
         private void UndoButton_Click(object sender, EventArgs e)
